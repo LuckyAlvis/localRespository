@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dai.mapper.WordsMapper">
+	<!-- 增加User -->
+	<insert id="addWords" parameterType="org.dai.entity.Words">
+		insert into
+		wordsInfo(wordsID,iID,iName,oID,oName,wordsContent,wordsTime) values
+		(#{wordsID},#{iID},#{iName},#{oID},#{oName},#{wordsContent},#{wordsTime})
+	</insert>
+	<!-- 删除User -->
+	<delete id="deleteWordsByWordsID" parameterType="int">
+		delete from
+		wordsInfo where wordsID=#{wordsID}
+	</delete>
+	<!-- 最大值 -->
+	<select id="MaxID" resultType="int">
+		select max(wordsID) from wordsInfo
+	</select>
+	<select id="queryMyWords" parameterType="int" resultType="org.dai.entity.Words">
+		select * from wordsInfo where oid=#{oid}
+	</select>
+</mapper>

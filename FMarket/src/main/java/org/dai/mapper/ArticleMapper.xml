@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dai.mapper.ArticleMapper">
+	<select id="queryUser"
+		resultType="org.dai.entity.User" parameterType="org.dai.entity.User">
+		select * from userInfo where userID = #{userID} and userPsd = #{userPsd}
+	</select>
+	<insert id="addArticle" parameterType="org.dai.entity.Article">
+		insert into articleInfo(articleID,articleName,articleDescription,articleCategory,articleOwnerID,articleOwner,articlePrice) values
+		(#{articleID},#{articleName},#{articleDescription},#{articleCategory},#{articleOwnerID},#{articleOwner},#{articlePrice})
+	</insert>
+	<delete id="deleteArticleByArticleID" parameterType="int">
+		delete from articleInfo where articleID=#{articleID}
+	</delete>
+	
+	<select id="queryArticleByArticleID" parameterType="int" resultType="org.dai.entity.Article">
+		select * from articleInfo where articleID = #{articleID}
+	</select>
+	<select id="queryArticles" resultType="org.dai.entity.Article">
+		select * from articleInfo;
+	</select>
+	<select id="queryArticlesByUserID" parameterType="int" resultType="org.dai.entity.Article">
+		select * from articleInfo where articleOwnerID = #{userID}
+	</select>
+	<select id="MaxID" resultType="int">
+		select max(articleID) from articleInfo
+	</select>
+	<select id="queryMyBorrowByUserID" parameterType="int">
+		select * from borrowInfo where bID=#{bID}
+	</select>
+</mapper>

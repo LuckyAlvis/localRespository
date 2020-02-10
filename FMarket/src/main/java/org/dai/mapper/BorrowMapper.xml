@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dai.mapper.BorrowMapper">
+	<!-- void addBorrow(Borrow borrow);
+	void deleteBorrowByBorrowID(int borrowID);
+	int MaxID();
+	List<Borrow> queryBorrowsByUserID(int userID); -->
+	<insert id="addBorrow" parameterType="org.dai.entity.Borrow">
+		insert into borrowInfo (borrowID,bArticleID,bID,bName,oID,oName,bDuration,bTime)
+		values
+		(#{borrowID},#{bArticleID},#{bID},#{bName},#{oID},#{oName},#{bDuration},#{bTime})
+	</insert>
+	<delete id="deleteBorrowByBorrowID" parameterType="int">
+		delete from borrowInfo where borrowID = #{borrowID}
+	</delete>
+	<select id="queryBorrowsByUserID" parameterType="int" resultType="org.dai.entity.Borrow">
+		select * from borrowInfo where bID=#{bID}
+	</select>
+	<select id="MaxID" resultType="int">
+		select max(borrowID) from borrowInfo
+	</select>
+</mapper>

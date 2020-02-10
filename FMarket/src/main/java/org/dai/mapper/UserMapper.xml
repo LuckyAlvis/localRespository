@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dai.mapper.UserMapper">
+	<!-- 增加User -->
+	<insert id="addUser" parameterType="org.dai.entity.User">
+		insert into
+		userInfo(userID,userName,userPsd,userSex,userPhone) values
+		(default,#{userName},#{userPsd},#{userSex},#{userPhone})
+	</insert>
+	<!-- 删除User -->
+	<delete id="deleteUserByUserID" parameterType="int">
+		delete from
+		userInfo where userID=#{userID}
+	</delete>
+	<!-- 修改User -->
+	<update id="updateUser" parameterType="org.dai.entity.User">
+		update userInfo set userName=#{userName},userPsd=#{userPsd},userSex=#{userSex},userPhone=#{userPhone} where userID = #{userID}
+	</update>
+	<!-- 查询User -->
+	<select id="queryUser" parameterType="org.dai.entity.User"
+		resultType="org.dai.entity.User">
+		select * from userInfo where userName = #{userName} and userPsd = #{userPsd}
+	</select>
+	<select id="queryUserByUserName" parameterType="String"
+		resultType="org.dai.entity.User">
+		select * from userInfo where userName = #{userName}
+	</select>
+	<select id="queryUserByUserID" parameterType="int" resultType="org.dai.entity.User">
+		select * from userInfo where userID = #{userID}
+	</select>
+</mapper>
